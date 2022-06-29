@@ -1,37 +1,83 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
-  const [num, setNum]=useState(0);
-  const [res,setRes]=useState(0);
+function Calc() 
+{
+  const [num1, setNum1] = useState(0);
+  const [num2, setNum2] = useState(0);
+  const [op, setOp] = useState();
+  const [result, setResult] = useState();
 
+  function handleChange(event, number) 
+  {
+    setNum1(event.target.value);
+  }
+  function handleChange1(event, number) 
+  {
+    setNum2(event.target.value);
+  }
+
+  function handleButtonClick(str)
+  {
+  setOp(str);
+  }
+
+  function calculate()
+   {
+    console.log(op);
+    let ans = 0;
+    if (op === "+") 
+    {
+      ans = Number(num1) + Number(num2);
+    }
+    else if (op === "-") 
+    {
+        ans = Number(num1) - Number(num2);
+    } 
+    else if (op === "*") 
+    {
+      ans = Number(num1) * Number(num2);
+    } 
+    else if (op==="/") 
+    {
+      ans = Number(num1) / Number(num2);
+    }
+    setResult(ans);
+  }
   return (
-    <div className="App">
-    <h1>CALCULATOR</h1>
-     <input type="number"></input>
-     <input type="number"></input>
-     <br></br>
-     <button>1</button>
-     <button>2</button>
-     <button>3</button>
-     <button>+</button>
-     <br></br>
-     <button>4</button>
-     <button>5</button>
-     <button>6</button>
-     <button>-</button>
-     <br></br>
-     <button>7</button>
-     <button>8</button>
-     <button>9</button>
-     <button>/</button>
-     <br></br>
-     <button>0</button>
-     <button>.</button>
-     <button>*</button>
-     <button>=</button>
+    
+    <div>
+      <label>Enter first number</label>
+      <input
+        type="number"
+        name="num1"
+        value={num1}
+        onChange={(event) => handleChange(event, num1)}
+      />
+      <br></br>
+      <label>Enter first number</label>
+      <input
+        type="number"
+        name="num2"
+        value={num2}
+        onChange={(event) => handleChange1(event, num2)}
+      />
+      <br></br>
+      <label>Enter operator</label>
+      
+      <button onClick={() => handleButtonClick('+')}>+</button>
+      <button onClick={() => handleButtonClick('-')}>-</button>
+      <button onClick={() => handleButtonClick('*')}>*</button>
+      <button onClick={() => handleButtonClick('/')}>/</button>
+      
+      <button type="submit" onClick={calculate}>
+        Calculate
+      </button>
+     
+      <h1>{num1} {op} {num2}</h1>
+      <h1>Output is: {result}</h1>
+
     </div>
   );
 }
 
-export default App;
+export default Calc;
